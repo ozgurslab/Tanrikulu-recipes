@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#f6f0e7" />
+  <title>Tanrikulu Recipes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div id="loginScreen" class="login-screen">
+    <form id="loginForm" class="login-card">
+      <div class="login-mark">TR</div>
+      <p class="eyebrow">FAMILY KITCHEN</p>
+      <h1>Tanrikulu Recipes</h1>
+      <p class="login-copy">Sign in to open the family recipe collection.</p>
+      <label>Username<input id="loginUsername" autocomplete="username" required /></label>
+      <label>Password<input id="loginPassword" type="password" autocomplete="current-password" inputmode="numeric" required /></label>
+      <p id="loginError" class="login-error hidden">Incorrect username or password.</p>
+      <button class="primary full login-button" type="submit">Enter kitchen</button>
+    </form>
+  </div>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">TR</div>
+        <div><h1>Tanrikulu Recipes</h1><p>Our family collection</p></div>
+      </div>
+      <button class="primary full" id="newRecipeBtn">＋ New recipe</button>
+      <div class="side-title"><span>Categories</span><button class="icon-btn" id="addCategoryBtn" title="Add category">＋</button></div>
+      <nav id="categoryList" class="category-list"></nav>
+      <div class="sidebar-footer"><span id="syncStatus">Connecting…</span><div><button class="text-btn" id="settingsBtn">Settings</button> · <button class="text-btn" id="logoutBtn">Log out</button></div></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="menuBtn">☰</button>
+        <div class="search-wrap"><span>⌕</span><input id="searchInput" placeholder="Search recipes or ingredients…" /></div>
+        <button class="secondary" id="randomBtn">Surprise me</button>
+      </header>
+
+      <section class="content">
+        <div class="hero-row">
+          <div><p class="eyebrow">OUR KITCHEN</p><h2 id="pageTitle">All Recipes</h2><p id="pageSubtitle">A shared collection of family favourites.</p></div>
+          <div class="count-pill"><strong id="recipeCount">0</strong><span>recipes</span></div>
+        </div>
+        <div id="recipeGrid" class="recipe-grid"></div>
+        <div id="emptyState" class="empty hidden"><div class="empty-icon">🍽</div><h3>No recipes here yet</h3><p>Add your first recipe to start the collection.</p><button class="primary" onclick="openRecipeModal()">Add a recipe</button></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="recipeDialog" class="modal">
+    <form id="recipeForm" class="modal-card">
+      <div class="modal-head"><div><p class="eyebrow">RECIPE</p><h3 id="recipeModalTitle">Add recipe</h3></div><button type="button" class="close-btn" data-close="recipeDialog">×</button></div>
+      <input type="hidden" id="recipeId" />
+      <div class="form-grid">
+        <label class="span2">Dish name<input id="recipeName" required placeholder="e.g. Lemon herb chicken" /></label>
+        <label>Category<select id="recipeCategory" required></select></label>
+        <label>Servings<input id="recipeServings" placeholder="e.g. 4" /></label>
+        <label>Prep time<input id="recipePrep" placeholder="e.g. 15 min" /></label>
+        <label>Cook time<input id="recipeCook" placeholder="e.g. 35 min" /></label>
+        <label class="span2">Ingredients <small>One ingredient per line</small><textarea id="recipeIngredients" required rows="8" placeholder="600 g chicken thighs\n2 tbsp olive oil\n1 lemon"></textarea></label>
+        <label class="span2">Method <small>One step per line</small><textarea id="recipeMethod" required rows="8" placeholder="Season the chicken.\nHeat the pan.\nCook until golden."></textarea></label>
+        <label class="span2">Notes<textarea id="recipeNotes" rows="3" placeholder="Optional family notes, substitutions, serving ideas…"></textarea></label>
+      </div>
+      <div class="modal-actions"><button type="button" id="deleteRecipeBtn" class="danger hidden">Delete</button><span></span><button type="button" class="secondary" data-close="recipeDialog">Cancel</button><button class="primary" type="submit">Save recipe</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="viewDialog" class="modal">
+    <article class="modal-card recipe-view">
+      <div class="modal-head"><div><p class="eyebrow" id="viewCategory"></p><h3 id="viewName"></h3></div><button class="close-btn" data-close="viewDialog">×</button></div>
+      <div class="recipe-number" id="viewNumber"></div>
+      <div class="meta-row" id="viewMeta"></div>
+      <div class="recipe-columns"><section><h4>Ingredients</h4><ul id="viewIngredients"></ul></section><section><h4>Method</h4><ol id="viewMethod"></ol></section></div>
+      <div id="viewNotesWrap" class="notes hidden"><h4>Notes</h4><p id="viewNotes"></p></div>
+      <div class="modal-actions"><span></span><button class="secondary" id="editRecipeBtn">Edit recipe</button><button class="primary" data-close="viewDialog">Done</button></div>
+    </article>
+  </dialog>
+
+  <dialog id="categoryDialog" class="modal small-modal">
+    <form id="categoryForm" class="modal-card"><div class="modal-head"><h3>Add category</h3><button type="button" class="close-btn" data-close="categoryDialog">×</button></div><label>Category name<input id="categoryName" required placeholder="e.g. Pasta" /></label><div class="modal-actions"><span></span><button type="button" class="secondary" data-close="categoryDialog">Cancel</button><button class="primary">Add</button></div></form>
+  </dialog>
+
+  <dialog id="settingsDialog" class="modal small-modal">
+    <div class="modal-card"><div class="modal-head"><div><p class="eyebrow">CONNECTION</p><h3>Family database</h3></div><button class="close-btn" data-close="settingsDialog">×</button></div><p class="help">This version uses Supabase so everyone in the family sees the same recipes. Add your project URL and anon key in <code>config.js</code>, then publish the folder with GitHub Pages.</p><div class="connection-box"><span id="connectionDot"></span><div><strong id="connectionTitle">Checking…</strong><p id="connectionDetail"></p></div></div><div class="modal-actions"><span></span><button class="primary" data-close="settingsDialog">Done</button></div></div>
+  </dialog>
+
+  <div id="toast" class="toast"></div>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
