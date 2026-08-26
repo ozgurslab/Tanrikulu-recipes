@@ -58,12 +58,12 @@
     <form id="recipeForm" class="modal-card">
       <div class="modal-head"><div><p class="eyebrow">RECIPE</p><h3 id="recipeModalTitle">Add recipe</h3></div><button type="button" class="close-btn" data-close="recipeDialog">×</button></div>
       <input type="hidden" id="recipeId" />
-      <div class="form-grid">
+      <div class="import-box span2"><div><strong>Import a recipe</strong><p>Paste a recipe link and let AI fill the form, or paste recipe text below.</p></div><div class="import-row"><input id="importUrl" type="url" placeholder="https://example.com/recipe" /><button type="button" class="secondary" id="aiImportBtn">AI import link</button></div><textarea id="quickPaste" rows="4" placeholder="Or paste a whole recipe from WhatsApp / a website here…"></textarea><button type="button" class="text-btn" id="parsePasteBtn">Fill form from pasted text</button></div><div class="form-grid">
         <label class="span2">Dish name<input id="recipeName" required placeholder="e.g. Lemon herb chicken" /></label>
         <label>Category<select id="recipeCategory" required></select></label>
         <label>Servings<input id="recipeServings" placeholder="e.g. 4" /></label>
         <label>Prep time<input id="recipePrep" placeholder="e.g. 15 min" /></label>
-        <label>Cook time<input id="recipeCook" placeholder="e.g. 35 min" /></label>
+        <label>Cook time<input id="recipeCook" placeholder="e.g. 35 min" /></label><label>Estimated total time<input id="recipeTotal" placeholder="e.g. 50 min" /></label><label>Recipe photo<input id="recipePhoto" type="file" accept="image/*" /></label><input type="hidden" id="recipePhotoUrl" /><label class="span2">Source link<input id="recipeSource" type="url" placeholder="Optional recipe website URL" /></label>
         <label class="span2">Ingredients <small>One ingredient per line</small><textarea id="recipeIngredients" required rows="8" placeholder="600 g chicken thighs\n2 tbsp olive oil\n1 lemon"></textarea></label>
         <label class="span2">Method <small>One step per line</small><textarea id="recipeMethod" required rows="8" placeholder="Season the chicken.\nHeat the pan.\nCook until golden."></textarea></label>
         <label class="span2">Notes<textarea id="recipeNotes" rows="3" placeholder="Optional family notes, substitutions, serving ideas…"></textarea></label>
@@ -75,7 +75,7 @@
   <dialog id="viewDialog" class="modal">
     <article class="modal-card recipe-view">
       <div class="modal-head"><div><p class="eyebrow" id="viewCategory"></p><h3 id="viewName"></h3></div><button class="close-btn" data-close="viewDialog">×</button></div>
-      <div class="recipe-number" id="viewNumber"></div>
+      <img id="viewPhoto" class="view-photo hidden" alt="Recipe photo" /><div class="recipe-number" id="viewNumber"></div><div class="favorite-box"><strong>❤️ Family favourites</strong><div id="favoriteNames" class="favorite-names"></div><div class="favorite-add"><input id="favoriteName" placeholder="Family name" /><button id="favoriteBtn" class="secondary" type="button">Add favourite</button></div></div>
       <div class="meta-row" id="viewMeta"></div>
       <div class="recipe-columns"><section><h4>Ingredients</h4><ul id="viewIngredients"></ul></section><section><h4>Method</h4><ol id="viewMethod"></ol></section></div>
       <div id="viewNotesWrap" class="notes hidden"><h4>Notes</h4><p id="viewNotes"></p></div>
