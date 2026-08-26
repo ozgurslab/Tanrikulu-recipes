@@ -34,3 +34,6 @@ create policy "Family can delete recipe photos" on storage.objects for delete to
 create sequence if not exists public.recipe_number_seq;
 select setval('public.recipe_number_seq', greatest(coalesce((select max(recipe_number) from public.recipes),0),1));
 alter table public.recipes alter column recipe_number set default nextval('public.recipe_number_seq');
+
+-- V3 default category
+insert into public.categories (name, sort_order) values ('Dessert', 10) on conflict (name) do nothing;

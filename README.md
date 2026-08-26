@@ -1,17 +1,21 @@
-# Tanrikulu Recipes
+# Tanrikulu Recipes V3
 
-A mobile-friendly private family recipe collection hosted on GitHub Pages with Supabase for shared data.
+A mobile-first family recipe app using GitHub Pages + Supabase.
 
-## Features
+## V3
+- Manrope typography throughout
+- Healthy-food visual system
+- Full-screen food-photo login
+- Photo-led recipe cards
 - Permanent recipe numbers
-- Editable categories
-- Recipe photos
-- Family favourites by name
-- Preparation-time tags
-- Easy paste/import form
-- AI link import UI (requires the optional Supabase Edge Function)
+- Family favourites
+- Estimated total time
+- Editable/addable categories
+- Dessert default category
+- Recipe photo uploads
+- Paste/import workflow
 
-## Setup
-Run `upgrade.sql` once in the Supabase SQL Editor, then keep the files in this repository on GitHub Pages.
+## Upgrade
+Run `v3-upgrade.sql` once in Supabase, then upload all V3 files to the GitHub repository and commit.
 
-The family login credentials are intentionally not documented in this public README.
+The simple family login is intentionally not documented here.

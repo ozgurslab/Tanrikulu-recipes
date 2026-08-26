@@ -7,17 +7,17 @@
   <title>Tanrikulu Recipes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <div id="loginScreen" class="login-screen">
     <form id="loginForm" class="login-card">
-      <div class="login-mark">TR</div>
-      <p class="eyebrow">FAMILY KITCHEN</p>
-      <h1>Tanrikulu Recipes</h1>
-      <p class="login-copy">Sign in to open the family recipe collection.</p>
+      <div class="login-logo">T<span>🌿</span></div>
+      <p class="login-brand">TANRIKULU <span>RECIPES</span></p>
+      <h1>Welcome Back</h1>
+      <p class="login-copy">Sign in to your family recipe collection</p>
       <label>Username<input id="loginUsername" autocomplete="username" required /></label>
       <label>Password<input id="loginPassword" type="password" autocomplete="current-password" inputmode="numeric" required /></label>
       <p id="loginError" class="login-error hidden">Incorrect username or password.</p>
@@ -27,7 +27,7 @@
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
       <div class="brand">
-        <div class="brand-mark">TR</div>
+        <div class="brand-mark">T<span>•</span></div>
         <div><h1>Tanrikulu Recipes</h1><p>Our family collection</p></div>
       </div>
       <button class="primary full" id="newRecipeBtn">＋ New recipe</button>
@@ -45,7 +45,7 @@
 
       <section class="content">
         <div class="hero-row">
-          <div><p class="eyebrow">OUR KITCHEN</p><h2 id="pageTitle">All Recipes</h2><p id="pageSubtitle">A shared collection of family favourites.</p></div>
+          <div><p class="eyebrow">HEALTHY • FAMILY • TOGETHER</p><h2 id="pageTitle">All Recipes</h2><p id="pageSubtitle">Cook together. Eat better. Live well.</p></div>
           <div class="count-pill"><strong id="recipeCount">0</strong><span>recipes</span></div>
         </div>
         <div id="recipeGrid" class="recipe-grid"></div>
