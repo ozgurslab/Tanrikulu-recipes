@@ -15,3 +15,19 @@ body{background:linear-gradient(180deg,#faf8f2 0,#f3f0e8 100%)}
 /* V4.1 refinements */
 .category-item{font-size:17px;padding:13px 12px;gap:13px;font-weight:650}.category-item>span:first-child{font-size:22px;min-width:26px;text-align:center}.category-item .count{font-size:13px}.login-screen{background-position:center top}.login-card.login-overlay{margin-bottom:0}.login-button{margin-top:12px;height:56px;font-size:17px}
 @media(max-width:760px){.category-item{font-size:18px;padding:14px 12px}.category-item>span:first-child{font-size:24px}.login-screen{background-position:center top}}
+
+/* V4.2 iPhone navigation refinements */
+@media(max-width:760px){
+  .sidebar{width:min(82vw,310px);height:100dvh;padding:16px 16px 12px;overflow:hidden}
+  .brand{margin-bottom:12px}
+  .brand-mark{width:40px;height:40px}
+  .brand h1{font-size:16px}
+  .brand p{font-size:9px}
+  .full{margin-bottom:12px;padding:9px 12px}
+  .side-title{font-size:10px;padding:0 7px 5px}
+  .category-list{gap:1px;overflow:hidden;flex:1;min-height:0}
+  .category-item{font-size:15px;line-height:1.1;padding:7px 9px;gap:9px;border-radius:8px;min-height:0}
+  .category-item>span:first-child{font-size:19px;min-width:22px}
+  .category-item .count{font-size:11px}
+  .sidebar-footer{padding-top:9px;font-size:9px;flex-wrap:wrap;gap:5px}
+}

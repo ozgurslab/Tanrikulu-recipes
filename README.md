@@ -1,13 +1,9 @@
-# Tanrikulu Recipes
+# Tanrikulu Recipes V4.2
 
-Private family recipe collection built for GitHub Pages with Supabase as the shared database.
+GitHub Pages family recipe app connected to Supabase.
 
-## V4
-- Manrope typography
-- Full-image healthy-food login screen
-- Custom iPhone home-screen icon
-- Rich photographic home hero
-- Larger category navigation
-- Recipe photos, permanent recipe numbers, family favourites and custom categories
-
-The family access credentials are intentionally not documented in this public README.
+V4.2 refinements:
+- cleaner full-bleed iPhone Home Screen icon
+- tap outside the Categories drawer to close it
+- compact iPhone category typography/spacing so the full category list fits without scrolling on iPhone Max
+- recipe deletion with confirmation
