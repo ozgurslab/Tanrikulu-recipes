@@ -3,7 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#f6f0e7" />
+  <meta name="theme-color" content="#173f2d" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Tanrikulu Recipes" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
   <title>Tanrikulu Recipes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,13 +18,9 @@
 </head>
 <body>
   <div id="loginScreen" class="login-screen">
-    <form id="loginForm" class="login-card">
-      <div class="login-logo">T<span>🌿</span></div>
-      <p class="login-brand">TANRIKULU <span>RECIPES</span></p>
-      <h1>Welcome Back</h1>
-      <p class="login-copy">Sign in to your family recipe collection</p>
-      <label>Username<input id="loginUsername" autocomplete="username" required /></label>
-      <label>Password<input id="loginPassword" type="password" autocomplete="current-password" inputmode="numeric" required /></label>
+    <form id="loginForm" class="login-card login-overlay">
+      <label class="login-field"><span>♙</span><input id="loginUsername" autocomplete="username" placeholder="Username" required /></label>
+      <label class="login-field"><span>▣</span><input id="loginPassword" type="password" autocomplete="current-password" inputmode="numeric" placeholder="Password" required /></label>
       <p id="loginError" class="login-error hidden">Incorrect username or password.</p>
       <button class="primary full login-button" type="submit">Enter kitchen</button>
     </form>
@@ -44,6 +45,9 @@
       </header>
 
       <section class="content">
+        <section class="home-hero">
+          <div class="home-hero-copy"><p>GOOD FOOD • GOOD MOOD</p><h2>Better together.</h2><span>Healthy family favourites, all in one place.</span></div>
+        </section>
         <div class="hero-row">
           <div><p class="eyebrow">HEALTHY • FAMILY • TOGETHER</p><h2 id="pageTitle">All Recipes</h2><p id="pageSubtitle">Cook together. Eat better. Live well.</p></div>
           <div class="count-pill"><strong id="recipeCount">0</strong><span>recipes</span></div>
