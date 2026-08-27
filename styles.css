@@ -31,3 +31,15 @@ body{background:linear-gradient(180deg,#faf8f2 0,#f3f0e8 100%)}
   .category-item .count{font-size:11px}
   .sidebar-footer{padding-top:9px;font-size:9px;flex-wrap:wrap;gap:5px}
 }
+/* V4.3: iPhone portrait login, larger one-screen categories */
+.login-screen{background-image:linear-gradient(rgba(5,20,12,.02),rgba(5,20,12,.22)),url('healthy-login.jpg');background-position:center center;background-size:cover;background-repeat:no-repeat}
+@media(max-width:760px){
+  .sidebar{width:min(84vw,318px);padding:14px 15px 10px}
+  .brand{margin-bottom:12px;gap:10px}.brand-mark{width:39px;height:39px}.brand h1{font-size:16px}.brand p{display:none}
+  .sidebar>.primary.full{margin-bottom:10px;padding:9px 12px}.side-title{font-size:11px;padding:0 6px 5px}
+  .category-list{gap:1px;overflow:hidden;flex:1;min-height:0}
+  .category-item{font-size:16.5px;line-height:1.08;padding:8.5px 9px;gap:10px;border-radius:8px;font-weight:700}
+  .category-item>span:first-child{font-size:21px;min-width:24px}.category-item .count{font-size:11px}
+  .sidebar-footer{padding-top:7px;font-size:9px;gap:4px}
+  .login-screen{background-position:center center;padding:0 18px max(5vh,30px)}
+}

@@ -1,9 +1,5 @@
-# Tanrikulu Recipes V4.2
+# Tanrikulu Recipes V4.3
 
-GitHub Pages family recipe app connected to Supabase.
+GitHub Pages + Supabase family recipe app.
 
-V4.2 refinements:
-- cleaner full-bleed iPhone Home Screen icon
-- tap outside the Categories drawer to close it
-- compact iPhone category typography/spacing so the full category list fits without scrolling on iPhone Max
-- recipe deletion with confirmation
+V4.3 improves the iPhone login artwork, uses a new full-bleed premium app icon, keeps the category drawer dismissible by tapping outside, and enlarges category labels/icons while keeping the menu fitted to an iPhone Max screen.
