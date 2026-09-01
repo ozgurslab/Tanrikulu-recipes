@@ -185,3 +185,20 @@ body{background:linear-gradient(180deg,#faf8f2 0,#f3f0e8 100%)}
   .home-hero-copy h2{font-size:42px!important;line-height:1.02}
   .home-hero-copy span{font-size:14px!important}
 }
+
+
+/* V6.2: clearer numbering + compact link-only recipe cards */
+.number{font-size:20px!important;line-height:1;font-weight:800!important;letter-spacing:.03em!important;color:#315f24!important}
+.recipe-number{font-size:82px!important;font-weight:800!important;color:#e7decf!important}
+.recipe-card.link-only{min-height:150px!important;padding-bottom:0!important}
+.recipe-card.link-only .photo-thumb{height:120px!important}
+.recipe-card.link-only h3{font-size:20px!important;margin-top:10px!important;margin-bottom:8px!important}
+.recipe-card.link-only .card-meta{margin-bottom:14px!important}
+.recipe-card.link-only .card-top{margin-top:14px!important}
+@media(max-width:760px){
+  .number{font-size:22px!important}
+  .recipe-number{font-size:64px!important;top:82px!important;right:20px!important}
+  .recipe-card.link-only{min-height:138px!important}
+  .recipe-card.link-only .photo-thumb{height:105px!important}
+  .recipe-card.link-only h3{font-size:19px!important}
+}
