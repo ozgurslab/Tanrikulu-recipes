@@ -68,13 +68,13 @@
       </div>
       <div class="form-grid">
         <label class="span2 contributor-field">Recipe by <small>The name will be shown with the recipe.</small><input id="recipeContributor" placeholder="e.g. Melike Tanrikulu" /></label>
-        <label class="span2">Dish name<input id="recipeName" required placeholder="e.g. Lemon herb chicken" /></label>
-        <label>Category<select id="recipeCategory" required></select></label>
+        <label class="span2">Dish name <small>Optional when you save only a link</small><input id="recipeName" placeholder="e.g. Lemon herb chicken" /></label>
+        <label>Category <small>Optional for a link-only recipe</small><select id="recipeCategory"></select></label>
         <label>Servings<input id="recipeServings" placeholder="e.g. 4" /></label>
         <label>Prep time<input id="recipePrep" placeholder="e.g. 15 min" /></label>
         <label>Cook time<input id="recipeCook" placeholder="e.g. 35 min" /></label><label>Estimated total time<input id="recipeTotal" placeholder="e.g. 50 min" /></label><label>Recipe photo<input id="recipePhoto" type="file" accept="image/*" /></label><input type="hidden" id="recipePhotoUrl" />
-        <label class="span2">Ingredients <small>One ingredient per line</small><textarea id="recipeIngredients" required rows="8" placeholder="600 g chicken thighs\n2 tbsp olive oil\n1 lemon"></textarea></label>
-        <label class="span2">Method <small>One step per line</small><textarea id="recipeMethod" required rows="8" placeholder="Season the chicken.\nHeat the pan.\nCook until golden."></textarea></label>
+        <label class="span2">Ingredients <small>Optional when you save only a link</small><textarea id="recipeIngredients" rows="8" placeholder="600 g chicken thighs\n2 tbsp olive oil\n1 lemon"></textarea></label>
+        <label class="span2">Method <small>Optional when you save only a link</small><textarea id="recipeMethod" rows="8" placeholder="Season the chicken.\nHeat the pan.\nCook until golden."></textarea></label>
         <label class="span2">Notes<textarea id="recipeNotes" rows="3" placeholder="Optional family notes, substitutions, serving ideas…"></textarea></label>
       </div>
       <div class="modal-actions"><button type="button" id="deleteRecipeBtn" class="danger hidden">Delete</button><span></span><button type="button" class="secondary" data-close="recipeDialog">Cancel</button><button class="primary" type="submit">Save recipe</button></div>

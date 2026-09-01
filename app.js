@@ -17,7 +17,51 @@ function renderCategories(){const list=$('categoryList');list.innerHTML=`<div cl
 function renderRecipes(){const q=$('searchInput').value.toLowerCase().trim();let shown=recipes.filter(r=>(activeCategory==='all'||String(r.category_id)===activeCategory)&&(!q||[r.name,r.ingredients,r.notes].join(' ').toLowerCase().includes(q)));const cat=categories.find(c=>String(c.id)===activeCategory);$('pageTitle').textContent=cat?cat.name:'All Recipes';$('pageSubtitle').textContent=cat?`Browse the family’s ${cat.name.toLowerCase()} recipes.`:'A shared collection of family favourites.';$('recipeCount').textContent=shown.length;$('recipeGrid').innerHTML=shown.map(r=>{const c=categories.find(x=>String(x.id)===String(r.category_id)),fc=favorites.filter(f=>String(f.recipe_id)===String(r.id)).length;return `<article class="recipe-card" data-id="${r.id}">${r.photo_url?`<img class="photo-thumb" src="${esc(r.photo_url)}" alt="">`:''}<div class="card-top"><span class="number">#${String(r.recipe_number||0).padStart(3,'0')}</span><span class="tag">${esc(c?.name||'Recipe')}</span></div><h3>${esc(r.name)}</h3>${r.contributor_name?`<div class="card-byline">by ${esc(r.contributor_name)}</div>`:''}<div class="card-meta">${r.total_time?`<span class="tag time-tag">⏱ ${esc(r.total_time)}</span>`:''}${r.servings?`<span>Serves ${esc(r.servings)}</span>`:''}${fc?`<span>❤️ ${fc}</span>`:''}</div></article>`}).join('');$('emptyState').classList.toggle('hidden',shown.length>0);document.querySelectorAll('.recipe-card').forEach(el=>el.onclick=()=>viewRecipe(recipes.find(r=>String(r.id)===el.dataset.id)))}
 function openRecipeModal(r=null){currentRecipe=r;$('recipeModalTitle').textContent=r?'Edit recipe':'Add recipe';$('recipeId').value=r?.id||'';$('recipeContributor').value=r?.contributor_name||'';$('recipeName').value=r?.name||'';$('recipeCategory').value=r?.category_id||categories[0]?.id||'';$('recipeServings').value=r?.servings||'';$('recipePrep').value=r?.prep_time||'';$('recipeCook').value=r?.cook_time||'';$('recipeTotal').value=r?.total_time||'';$('recipeIngredients').value=r?.ingredients||'';$('recipeMethod').value=r?.method||'';$('recipeNotes').value=r?.notes||'';$('recipeSource').value=r?.source_url||'';$('recipePhotoUrl').value=r?.photo_url||'';$('recipePhoto').value='';$('deleteRecipeBtn').classList.toggle('hidden',!r);$('recipeDialog').showModal()}
 async function uploadPhoto(){const file=$('recipePhoto').files[0];if(!file)return $('recipePhotoUrl').value;const ext=(file.name.split('.').pop()||'jpg').toLowerCase(),path=`${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;toast('Uploading photo…');const {error}=await db.storage.from('recipe-photos').upload(path,file,{upsert:false});if(error)throw error;return db.storage.from('recipe-photos').getPublicUrl(path).data.publicUrl}
-async function saveRecipe(e){e.preventDefault();try{const id=$('recipeId').value,photo_url=await uploadPhoto(),payload={contributor_name:$('recipeContributor').value.trim(),name:$('recipeName').value.trim(),category_id:$('recipeCategory').value,servings:$('recipeServings').value.trim(),prep_time:$('recipePrep').value.trim(),cook_time:$('recipeCook').value.trim(),total_time:$('recipeTotal').value.trim(),ingredients:$('recipeIngredients').value.trim(),method:$('recipeMethod').value.trim(),notes:$('recipeNotes').value.trim(),source_url:$('recipeSource').value.trim(),photo_url};let res=id?await db.from('recipes').update(payload).eq('id',id):await db.from('recipes').insert(payload);if(res.error)throw res.error;$('recipeDialog').close();await loadData();toast('Recipe saved')}catch(e){console.error(e);toast(e.message||'Could not save recipe')}}
+function linkedRecipeName(url){
+  try{
+    const u=new URL(url),host=u.hostname.replace(/^www\./,'');
+    const last=decodeURIComponent(u.pathname.split('/').filter(Boolean).pop()||'').replace(/[-_]+/g,' ').replace(/\.[a-z0-9]+$/i,'').trim();
+    if(last){return last.replace(/\b\w/g,c=>c.toUpperCase()).slice(0,90)}
+    return `Recipe from ${host}`;
+  }catch{return 'Linked recipe'}
+}
+async function saveRecipe(e){
+  e.preventDefault();
+  try{
+    const id=$('recipeId').value;
+    const source_url=$('recipeSource').value.trim();
+    let name=$('recipeName').value.trim();
+    const ingredients=$('recipeIngredients').value.trim();
+    const method=$('recipeMethod').value.trim();
+    const isLinkOnly=!!source_url&&!name&&!ingredients&&!method;
+    if(!source_url&&(!name||!ingredients||!method)){
+      toast('Add a recipe link, or enter dish name, ingredients and method');
+      return;
+    }
+    if(source_url&&!name)name=linkedRecipeName(source_url);
+    const photo_url=await uploadPhoto();
+    const categoryValue=$('recipeCategory').value;
+    const payload={
+      contributor_name:$('recipeContributor').value.trim(),
+      name,
+      category_id:categoryValue||null,
+      servings:$('recipeServings').value.trim(),
+      prep_time:$('recipePrep').value.trim(),
+      cook_time:$('recipeCook').value.trim(),
+      total_time:$('recipeTotal').value.trim(),
+      ingredients,
+      method,
+      notes:$('recipeNotes').value.trim(),
+      source_url,
+      photo_url
+    };
+    let res=id?await db.from('recipes').update(payload).eq('id',id):await db.from('recipes').insert(payload);
+    if(res.error)throw res.error;
+    $('recipeDialog').close();
+    await loadData();
+    toast(isLinkOnly?'Recipe link saved':'Recipe saved');
+  }catch(e){console.error(e);toast(e.message||'Could not save recipe')}
+}
 async function deleteRecipeFromView(){if(!currentRecipe||!confirm(`Delete “${currentRecipe.name}” permanently? This cannot be undone.`))return;const {error}=await db.from('recipes').delete().eq('id',currentRecipe.id);if(error)return toast(error.message);$('viewDialog').close();await loadData();toast('Recipe deleted')}
 async function deleteRecipe(){if(!currentRecipe||!confirm(`Delete “${currentRecipe.name}”?`))return;const {error}=await db.from('recipes').delete().eq('id',currentRecipe.id);if(error)return toast(error.message);$('recipeDialog').close();await loadData();toast('Recipe deleted')}
 async function saveCategory(e){e.preventDefault();const name=$('categoryName').value.trim();if(!name)return;const {error}=await db.from('categories').insert({name,sort_order:categories.length});if(error)return toast(error.message);$('categoryName').value='';$('categoryDialog').close();await loadData();toast('Category added')}
