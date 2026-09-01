@@ -1,5 +1,5 @@
-# Tanrikulu Recipes V4.3
+# Tanrikulu Recipes V5
 
-GitHub Pages + Supabase family recipe app.
+Changes: simplified login background, removed AI import, optional source link saved/displayed with recipes, and recipe contributor name shown in red italic type.
 
-V4.3 improves the iPhone login artwork, uses a new full-bleed premium app icon, keeps the category drawer dismissible by tapping outside, and enlarges category labels/icons while keeping the menu fitted to an iPhone Max screen.
+Before deploying, run `v5-upgrade.sql` once in Supabase SQL Editor. Then upload all files in this folder to the GitHub repository root and commit.

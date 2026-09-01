@@ -43,3 +43,67 @@ body{background:linear-gradient(180deg,#faf8f2 0,#f3f0e8 100%)}
   .sidebar-footer{padding-top:7px;font-size:9px;gap:4px}
   .login-screen{background-position:center center;padding:0 18px max(5vh,30px)}
 }
+
+
+/* V5 — simpler login + source link + recipe contributor */
+.login-screen{
+  background-image:url('healthy-login.jpg')!important;
+  background-position:center center!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  padding:0 18px max(4.5vh,26px)!important;
+  place-items:end center!important;
+}
+.login-screen::before{content:none!important}
+.login-card.login-overlay{
+  width:min(430px,94vw)!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+/* The new background already contains the visible field/button treatment.
+   Real controls sit precisely over it to avoid duplicate boxes. */
+.login-field{
+  height:58px!important;
+  margin:0!important;
+  padding:0 20px!important;
+  background:rgba(10,20,13,.06)!important;
+  border-color:transparent!important;
+  backdrop-filter:none!important;
+}
+.login-field:first-of-type{border-radius:16px 16px 0 0!important;border-bottom:0!important}
+.login-field:nth-of-type(2){border-radius:0 0 16px 16px!important}
+.login-field span{opacity:0!important}
+.login-field input{color:#fff!important;font-size:16px!important;text-shadow:0 1px 2px rgba(0,0,0,.35)!important}
+.login-field input::placeholder{color:transparent!important}
+.login-button{
+  height:60px!important;
+  margin-top:13px!important;
+  background:transparent!important;
+  color:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+.login-error{background:rgba(125,26,26,.88)!important;color:#fff!important}
+.source-box{grid-column:span 2;background:#f7f4ed;border:1px solid var(--line);border-radius:15px;padding:16px;margin-bottom:2px}
+.source-box strong{font-size:14px;color:var(--ink)}
+.source-box strong span{font-weight:500;color:var(--muted)}
+.source-box p{font-size:12px;color:var(--muted);margin:5px 0 11px;line-height:1.45}
+.source-box input{width:100%}
+.contributor-field input{border-color:#e4c5c0;background:#fffafa}
+.recipe-contributor{margin:-14px 0 18px;color:#8f2f25;font-size:14px}
+.recipe-contributor span,.card-byline{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;color:#b23a2d}
+.recipe-contributor span{font-size:27px;font-weight:600;margin-left:5px}
+.card-byline{font-size:18px;line-height:1;margin:-4px 0 12px}
+.recipe-source{margin:-8px 0 24px;font-size:13px;color:var(--accent)}
+.recipe-source a{color:var(--accent);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(69,111,39,.35)}
+@media(max-width:760px){
+  .login-screen{background-position:center center!important;padding-bottom:max(4vh,24px)!important}
+  .login-card.login-overlay{width:min(410px,92vw)!important}
+  .login-field{height:56px!important}
+  .login-button{height:58px!important;margin-top:12px!important}
+  .source-box{padding:14px}
+  .recipe-contributor span{font-size:24px}
+}
