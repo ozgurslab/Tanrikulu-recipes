@@ -19,8 +19,8 @@
 <body>
   <div id="loginScreen" class="login-screen">
     <form id="loginForm" class="login-card login-overlay">
-      <label class="login-field"><span>♙</span><input id="loginUsername" autocomplete="username" placeholder="Username" required /></label>
-      <label class="login-field"><span>▣</span><input id="loginPassword" type="password" autocomplete="current-password" inputmode="numeric" placeholder="Password" required /></label>
+      <label class="login-field"><input id="loginUsername" autocomplete="username" placeholder="Username" required /></label>
+      <label class="login-field"><input id="loginPassword" type="password" autocomplete="current-password" inputmode="numeric" placeholder="Password" required /></label>
       <p id="loginError" class="login-error hidden">Incorrect username or password.</p>
       <button class="primary full login-button" type="submit">Enter kitchen</button>
     </form>
@@ -84,7 +84,9 @@
   <dialog id="viewDialog" class="modal">
     <article class="modal-card recipe-view">
       <div class="modal-head"><div><p class="eyebrow" id="viewCategory"></p><h3 id="viewName"></h3></div><button class="close-btn" data-close="viewDialog">×</button></div>
-      <img id="viewPhoto" class="view-photo hidden" alt="Recipe photo" /><div class="recipe-number" id="viewNumber"></div><div class="favorite-box"><strong>❤️ Family favourites</strong><div id="favoriteNames" class="favorite-names"></div><div class="favorite-add"><input id="favoriteName" placeholder="Family name" /><button id="favoriteBtn" class="secondary" type="button">Add favourite</button></div></div>
+      <img id="viewPhoto" class="view-photo hidden" alt="Recipe photo" /><div class="recipe-number" id="viewNumber"></div>
+      <div class="translate-row"><button id="translateRecipeBtn" class="translate-btn" type="button">🌐 Translate</button><span id="viewLanguage" class="language-chip">Original</span></div>
+      <div class="favorite-box"><strong>❤️ Family favourites</strong><div id="favoriteNames" class="favorite-names"></div><div class="favorite-add"><input id="favoriteName" placeholder="Family name" /><button id="favoriteBtn" class="secondary" type="button">Add favourite</button></div></div>
       <div class="meta-row" id="viewMeta"></div>
       <div id="viewContributorWrap" class="recipe-contributor hidden">Recipe by <span id="viewContributor"></span></div>
       <div id="viewSourceWrap" class="recipe-source hidden">↗ <a id="viewSource" target="_blank" rel="noopener noreferrer">Open original recipe</a></div>
